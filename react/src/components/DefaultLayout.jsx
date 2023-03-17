@@ -2,6 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 import Jobs from "../views/jobs";
 import axiosClient from "../axios.js";
+import Header from "../views/header";
+import Footer from "../views/footer";
 
 function DefaultLayout() {
     const { currentUser, setCurrentUser, userToken, setUserToken } =
@@ -22,7 +24,8 @@ function DefaultLayout() {
 
     return (
         <>
-            <div>userToken: {userToken}</div> <br />
+            <Header />
+            {/* <div>userToken: {userToken}</div> <br />
             <button onClick={(ev) => logout(ev)} className="btn">
                 Logout
             </button>
@@ -33,8 +36,9 @@ function DefaultLayout() {
             <div>
                 jobs: <Jobs />{" "}
             </div>{" "}
-            <br />
-            <Outlet />
+            <br /> */}
+
+            <Footer />
         </>
     );
 }

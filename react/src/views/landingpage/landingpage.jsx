@@ -1,7 +1,7 @@
 function Landingpage() {
     return (
         <>
-            <div>landingpage</div>
+            <div>Landingpage</div>
         </>
     );
 }
