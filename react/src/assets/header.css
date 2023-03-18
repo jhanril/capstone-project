@@ -172,7 +172,7 @@ section {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover > a {
-    color: #fff;
+    color: white;
 }
 
 .navbar .dropdown ul {
@@ -261,6 +261,15 @@ section {
     .navbar ul {
         display: none;
     }
+    .header-container {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        max-width: 100% !important;
+    }
 }
 
 .navbar-mobile {
@@ -303,7 +312,7 @@ section {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover > a {
-    color: #70b9b0;
+    color: black;
 }
 
 .navbar-mobile .getstarted,

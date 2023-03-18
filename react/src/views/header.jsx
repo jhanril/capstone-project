@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "../assets/header.css";
+import axiosClient from "../axios";
+import { useStateContext } from "../contexts/ContextProvider";
 
 function Header() {
     const [navbarlinks, setNavbarlinks] = useState([]);
@@ -45,13 +47,13 @@ function Header() {
     //     document.querySelector("#navbar").classList.toggle("navbar-mobile");
     // };
 
-    const toggleBacktotop = () => {
-        if (window.scrollY > 100) {
-            document.querySelector(".back-to-top").classList.add("active");
-        } else {
-            document.querySelector(".back-to-top").classList.remove("active");
-        }
-    };
+    // const toggleBacktotop = () => {
+    //     if (window.scrollY > 100) {
+    //         document.querySelector(".back-to-top").classList.add("active");
+    //     } else {
+    //         document.querySelector(".back-to-top").classList.remove("active");
+    //     }
+    // };
 
     useEffect(() => {
         navbarlinksActive();
@@ -69,34 +71,30 @@ function Header() {
         headerScrolled();
         window.addEventListener("scroll", headerScrolled);
 
-        const backtotop = document.querySelector(".back-to-top");
         const navbarMobileToggle = document.querySelector(".mobile-nav-toggle");
 
-        if (backtotop && navbarMobileToggle) {
-            window.addEventListener("scroll", toggleBacktotop);
-            toggleBacktotop();
-
+        if (navbarMobileToggle) {
             navbarMobileToggle.addEventListener("click", (e) => {
                 e.preventDefault;
-                // alert("test1");
                 document
                     .querySelector("#navbar")
                     .classList.toggle("navbar-mobile");
             });
-            // navbarlinks.forEach((link) => {
-            //     link.addEventListener("click", toggleMobileNav);
-            //     link.addEventListener("click", (e) => {
-            //         e.preventDefault();
-            //         scrollto(link.hash);
-            //     });
-            // });
         }
     }, [navbarlinks]);
 
+    const { setCurrentUser, setUserToken } = useStateContext();
+    const logout = (ev) => {
+        ev.preventDefault();
+        axiosClient.post("/logout").then((res) => {
+            setCurrentUser({});
+            setUserToken(null);
+        });
+    };
     return (
         <>
             <header id="header" className="fixed-top d-flex align-items-center">
-                <div className="container d-flex align-items-center">
+                <div className="container d-flex align-items-center header-container">
                     <div className="logo me-auto">
                         <h1>
                             <a href="index.html">LOGO HERE</a>
@@ -133,10 +131,10 @@ function Header() {
                             <li style={{ visibility: "hidden" }}>
                                 <a href="blog.html">Spacer man</a>
                             </li>
-                            <li class="dropdown">
+                            <li className="dropdown">
                                 <a href="#">
                                     <span>Account</span>
-                                    <i class="bi bi-chevron-down dropdown-indicator"></i>
+                                    <i className="bi bi-chevron-down dropdown-indicator"></i>
                                 </a>
                                 <ul>
                                     <li>
@@ -149,17 +147,22 @@ function Header() {
                                         <a href="#">Change Password</a>
                                     </li>
                                     <li>
-                                        <a href="#">Logout</a>
+                                        <a
+                                            href="#"
+                                            onClick={(ev) => logout(ev)}
+                                        >
+                                            Logout
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-                        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-                        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+                        <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+                        <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
                     </nav>
                 </div>
             </header>
-            <main id="main" style={{ height: "2000px" }}>
+            <main id="main" style={{ minHeight: "100vh" }}>
                 <section id="about" className="about">
                     <div className="container">
                         <div className="row">

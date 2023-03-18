@@ -5,6 +5,7 @@ import Dashboard from "./views/dashboard";
 import Landingpage from "./views/landingpage/landingpage";
 import Login from "./views/login";
 import Signup from "./views/signup";
+import EmployerProfile from "./views/employerProfile";
 
 const router = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile",
-                element: <Landingpage />,
+                element: <EmployerProfile />,
             },
         ],
     },
