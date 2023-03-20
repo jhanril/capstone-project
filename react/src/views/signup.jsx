@@ -75,9 +75,12 @@ function Signup() {
                             value={role}
                             onChange={(ev) => setRole(ev.target.value)}
                         >
-                            <option value="">Select type</option>
-                            <option value="applicant">Applicant</option>
-                            <option value="employer">Employer</option>
+                            <option value="admin">Select type</option>
+                            {/* <option value="applicant">Applicant</option>
+                            <option value="employer">Employer</option> */}
+                            <option value="admin" selected>
+                                Admin
+                            </option>
                         </select>
                     </div>
                     <div className="row">
