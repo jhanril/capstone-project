@@ -6,6 +6,8 @@ import Landingpage from "./views/landingpage/landingpage";
 import Login from "./views/login";
 import Signup from "./views/signup";
 import EmployerProfile from "./views/employerProfile";
+import Jobs from "./views/jobs";
+import JobForm from "./views/jobForm";
 
 const router = createBrowserRouter([
     {
@@ -39,8 +41,12 @@ const router = createBrowserRouter([
                 element: <Dashboard />,
             },
             {
-                path: "/profile",
-                element: <EmployerProfile />,
+                path: "/jobs",
+                element: <Jobs />,
+            },
+            {
+                path: "/jobs/create",
+                element: <JobForm />,
             },
         ],
     },

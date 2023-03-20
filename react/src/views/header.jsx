@@ -120,7 +120,12 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <a href="#services">Jobs</a>
+                                <Link
+                                    to="/jobs"
+                                    className="nav-link scrollto active"
+                                >
+                                    Jobs
+                                </Link>
                             </li>
                             <li>
                                 <a href="#portfolio">Job Stages</a>
