@@ -97,7 +97,7 @@ function Header() {
                 <div className="container d-flex align-items-center header-container">
                     <div className="logo me-auto">
                         <h1>
-                            <a href="index.html">LOGO HERE</a>
+                            <Link to="/">LOGO HERE</Link>
                         </h1>
                     </div>
 
@@ -111,20 +111,28 @@ function Header() {
                                     Dashboard
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link
                                     to="/profile"
                                     className="nav-link scrollto active"
                                 >
                                     Profile
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link
                                     to="/jobs"
                                     className="nav-link scrollto active"
                                 >
                                     Jobs
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/events"
+                                    className="nav-link scrollto active"
+                                >
+                                    Events
                                 </Link>
                             </li>
                             <li>

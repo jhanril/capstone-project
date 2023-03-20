@@ -7,8 +7,8 @@ import { useStateContext } from "../contexts/ContextProvider";
 function JobForm() {
     const { currentUser } = useStateContext();
 
-    const [userId, setUserId] = useState("");
-    const [status, setStatus] = useState(Boolean);
+    const [userId, setUserId] = useState(currentUser.id);
+    const [status, setStatus] = useState(1);
     const [companyName, setCompanyName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -20,8 +20,6 @@ function JobForm() {
     const handleSubmit = (ev) => {
         ev.preventDefault();
         setError("");
-        setUserId(currentUser.id);
-        setStatus(1);
 
         // use axiosClient to make the post request
         axiosClient
@@ -72,7 +70,11 @@ function JobForm() {
                                     name="user_id"
                                     value={userId}
                                 />
-                                <input type="hidden" name="status" value="1" />
+                                <input
+                                    type="hidden"
+                                    name="status"
+                                    value={status}
+                                />
                                 <div className="mb-3">
                                     <label
                                         className="small mb-1"

@@ -1,9 +1,10 @@
 import React from "react";
+import Jobs from "./jobs";
 
 function Dashboard() {
     return (
         <>
-            <div>Dashboard dsfsdf</div>
+            <h2>This is Dashboard</h2>
         </>
     );
 }
