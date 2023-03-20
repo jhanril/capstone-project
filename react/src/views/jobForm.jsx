@@ -1,7 +1,49 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axiosClient from "../axios";
 import "../assets/employer.css";
+import { useStateContext } from "../contexts/ContextProvider";
 
 function JobForm() {
+    const { currentUser } = useStateContext();
+
+    const [userId, setUserId] = useState("");
+    const [status, setStatus] = useState(Boolean);
+    const [companyName, setCompanyName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [jobType, setJobType] = useState("");
+    const [location, setLocation] = useState("");
+    const [jobDescription, setJobDescription] = useState("");
+    const [error, setError] = useState("");
+
+    const handleSubmit = (ev) => {
+        ev.preventDefault();
+        setError("");
+        setUserId(currentUser.id);
+        setStatus(1);
+
+        // use axiosClient to make the post request
+        axiosClient
+            .post("/jobs/create", {
+                company_name: companyName,
+                user_id: userId,
+                status,
+                email,
+                phone,
+                job_type: jobType,
+                location,
+                description: jobDescription,
+            })
+            .then(({ data }) => {
+                console.log(data);
+                // handle successful response
+            })
+            .catch((error) => {
+                console.error(error);
+                setError("An error occurred while submitting the form.");
+            });
+    };
     return (
         <div className="container-xl px-4 mt-4">
             <div className="mt-5 mb-3">
@@ -16,12 +58,21 @@ function JobForm() {
                 </div>
             </div>
             <hr className="mt-0 mb-4" />
+
+            {error && <div className="alert alert-danger">{error}</div>}
+
             <div className="row">
                 <div className="col-xl-12">
                     <div className="card mb-4">
-                        <div className="card-header">Account Details</div>
+                        <div className="card-header">Job Details</div>
                         <div className="card-body">
-                            <form>
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="hidden"
+                                    name="user_id"
+                                    value={userId}
+                                />
+                                <input type="hidden" name="status" value="1" />
                                 <div className="mb-3">
                                     <label
                                         className="small mb-1"
@@ -34,6 +85,10 @@ function JobForm() {
                                         id="companyName"
                                         type="text"
                                         placeholder="CompanyName"
+                                        value={companyName}
+                                        onChange={(ev) =>
+                                            setCompanyName(ev.target.value)
+                                        }
                                     />
                                 </div>
 
@@ -50,6 +105,10 @@ function JobForm() {
                                             id="inputEmailAddress"
                                             type="email"
                                             placeholder="Enter your email address"
+                                            value={email}
+                                            onChange={(ev) =>
+                                                setEmail(ev.target.value)
+                                            }
                                         />
                                     </div>
 
@@ -65,6 +124,10 @@ function JobForm() {
                                             id="inputPhone"
                                             type="tel"
                                             placeholder="Enter your phone number"
+                                            value={phone}
+                                            onChange={(ev) =>
+                                                setPhone(ev.target.value)
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -73,14 +136,18 @@ function JobForm() {
                                     <div className="col-md-6">
                                         <label
                                             className="small mb-1"
-                                            htmlFor="inputLocation"
+                                            htmlFor="select_type"
                                         >
                                             Job Type
                                         </label>
                                         <select
-                                            name="select_box"
+                                            name="select_type"
                                             className="form-control"
-                                            id="select_box"
+                                            id="select_type"
+                                            value={jobType}
+                                            onChange={(ev) =>
+                                                setJobType(ev.target.value)
+                                            }
                                         >
                                             <option>Select type</option>
                                             <option value="Full-time">
@@ -105,31 +172,43 @@ function JobForm() {
                                         <input
                                             className="form-control"
                                             id="inputLocation"
+                                            name="location"
                                             type="text"
                                             placeholder="Enter your location"
+                                            value={location}
+                                            onChange={(ev) =>
+                                                setLocation(ev.target.value)
+                                            }
+                                            required
                                         />
                                     </div>
                                 </div>
 
                                 <div className="mb-3 edit">
                                     <label
-                                        htmlFor="companyInfo"
+                                        htmlFor="jobDescription"
                                         className="small mb-1"
                                     >
-                                        Company Information
+                                        Job Description
                                     </label>
                                     <textarea
                                         className="form-control"
-                                        id="companyInfo"
+                                        id="jobDescription"
+                                        name="description"
                                         rows="5"
+                                        required
+                                        value={jobDescription}
+                                        onChange={(ev) =>
+                                            setJobDescription(ev.target.value)
+                                        }
                                     ></textarea>
                                 </div>
 
                                 <button
                                     className="btn btn-primary"
-                                    type="button"
+                                    type="submit"
                                 >
-                                    Save changes
+                                    Create Job
                                 </button>
                             </form>
                         </div>
