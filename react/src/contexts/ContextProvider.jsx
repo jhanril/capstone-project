@@ -63,7 +63,9 @@ const tmpJobs = [
 ];
 
 export const ContextProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, _setCurrentUser] = useState(
+        JSON.parse(localStorage.getItem("currentUser")) || {}
+    );
 
     const [userToken, _setUserToken] = useState(
         localStorage.getItem("TOKEN") || ""
@@ -78,6 +80,11 @@ export const ContextProvider = ({ children }) => {
             localStorage.removeItem("TOKEN");
         }
         _setUserToken(token);
+    };
+
+    const setCurrentUser = (newUser) => {
+        localStorage.setItem("currentUser", JSON.stringify(newUser));
+        _setCurrentUser(newUser);
     };
 
     return (
