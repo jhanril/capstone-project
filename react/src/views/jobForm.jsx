@@ -3,6 +3,7 @@ import { useState } from "react";
 import axiosClient from "../axios";
 import "../assets/employer.css";
 import { useStateContext } from "../contexts/ContextProvider";
+import Swal from "sweetalert2";
 
 function JobForm() {
     const { currentUser } = useStateContext();
@@ -15,7 +16,7 @@ function JobForm() {
     const [jobType, setJobType] = useState("");
     const [location, setLocation] = useState("");
     const [jobDescription, setJobDescription] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState({ __html: "" });
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
@@ -34,12 +35,29 @@ function JobForm() {
                 description: jobDescription,
             })
             .then(({ data }) => {
-                console.log(data);
+                // console.log(data);
                 // handle successful response
+                Swal.fire({
+                    icon: "success",
+                    title: "Job Created Successfully!",
+                    showConfirmButton: true,
+                    timer: 1500,
+                });
+                setCompanyName("");
+                setEmail("");
+                setPhone("");
+                setJobType("");
+                setLocation("");
+                setJobDescription("");
             })
             .catch((error) => {
+                if (error.response) {
+                    const finalErrors = Object.values(
+                        error.response.data.errors
+                    ).reduce((accum, next) => [...next, ...accum], []);
+                    setError({ __html: finalErrors.join("<br>") });
+                }
                 console.error(error);
-                setError("An error occurred while submitting the form.");
             });
     };
     return (
@@ -57,7 +75,12 @@ function JobForm() {
             </div>
             <hr className="mt-0 mb-4" />
 
-            {error && <div className="alert alert-danger">{error}</div>}
+            {error.__html && (
+                <div
+                    className="alert alert-danger"
+                    dangerouslySetInnerHTML={error}
+                ></div>
+            )}
 
             <div className="row">
                 <div className="col-xl-12">
@@ -80,13 +103,13 @@ function JobForm() {
                                         className="small mb-1"
                                         htmlFor="companyName"
                                     >
-                                        Company Name
+                                        Job Title
                                     </label>
                                     <input
                                         className="form-control"
                                         id="companyName"
                                         type="text"
-                                        placeholder="CompanyName"
+                                        placeholder="Job Title"
                                         value={companyName}
                                         onChange={(ev) =>
                                             setCompanyName(ev.target.value)
@@ -181,7 +204,6 @@ function JobForm() {
                                             onChange={(ev) =>
                                                 setLocation(ev.target.value)
                                             }
-                                            required
                                         />
                                     </div>
                                 </div>
@@ -198,7 +220,6 @@ function JobForm() {
                                         id="jobDescription"
                                         name="description"
                                         rows="5"
-                                        required
                                         value={jobDescription}
                                         onChange={(ev) =>
                                             setJobDescription(ev.target.value)
