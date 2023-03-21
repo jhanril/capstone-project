@@ -23,13 +23,13 @@ img {
     color: blue;
 }
 .bg-blue:hover {
-    background-color: #3e64ff;
+    background-color: #939cc4;
     color: #eee;
     cursor: pointer;
 }
 .bg-blue:hover .fa-check,
 .bg-blue:hover .fa-minus {
-    background-color: #3e64ff;
+    background-color: #939cc4;
     color: #eee;
 }
 
@@ -38,14 +38,14 @@ img {
     border: none;
 }
 
-.table tbody td:first-child {
+/* .table tbody td:first-child {
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
 }
 .table tbody td:last-child {
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-}
+} */
 #spacing-row {
     height: 10px;
 }
@@ -85,9 +85,15 @@ img {
 .toggle-btn.active > .inner-circle {
     margin-left: 19px;
 }
+.bi-trash {
+    color: rgb(214, 79, 79);
+}
+.bi-pencil-square {
+    color: blue;
+}
 @media (max-width: 575px) {
     .container {
-        width: 125%;
+        width: 100%;
         padding: 20px 10px;
     }
 }

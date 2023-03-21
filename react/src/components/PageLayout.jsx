@@ -21,7 +21,7 @@ function PageLayout() {
             setHeaderTitle("Create New Event");
             setToLink("/events/create");
         }
-    }, [isJobs]);
+    }, []);
     return (
         <div className="container mt-5 mb-3">
             <div className="mt-5 mb-3">

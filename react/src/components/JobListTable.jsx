@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function JobListTable({ job }) {
     const dateOptions = {
@@ -37,8 +38,13 @@ function JobListTable({ job }) {
                         <span className="fa fa-x pl-3"></span>
                     )}
                 </td>
-                <td className="pt-3">
-                    <span className="fa fa-ellipsis-v btn"></span>
+                <td className="pt-3 d-flex justify-content-evenly">
+                    <Link to={`/job/edit/${job.id}`}>
+                        <i className="bi bi-pencil-square"></i>
+                    </Link>
+                    <span>
+                        <i className="bi bi-trash"></i>
+                    </span>
                 </td>
             </tr>
             <tr id="spacing-row">

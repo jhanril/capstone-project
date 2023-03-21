@@ -28,6 +28,9 @@ function JobStages() {
                             <th scope="col">Job type</th>
                             <th scope="col">Date Created</th>
                             <th scope="col">Status</th>
+                            <th scope="col" className="text-center">
+                                Action
+                            </th>
                         </tr>
                     </thead>
                     <tbody className="py-2">
