@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function JobListTable({ job }) {
+function JobListTable({ job, onDeleteClick }) {
     const dateOptions = {
         year: "numeric",
         month: "long",
@@ -21,6 +21,7 @@ function JobListTable({ job }) {
         timeOptions
     );
     const dateAndTime = `${formattedDate} : ${formattedTime.toLowerCase()}`;
+
     return (
         <>
             <tr className="bg-blue">
@@ -42,7 +43,7 @@ function JobListTable({ job }) {
                     <Link to={`/job/edit/${job.id}`}>
                         <i className="bi bi-pencil-square"></i>
                     </Link>
-                    <span>
+                    <span onClick={() => onDeleteClick(job.id)}>
                         <i className="bi bi-trash"></i>
                     </span>
                 </td>

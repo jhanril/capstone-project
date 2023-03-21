@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import "../assets/jobstage.css";
 import axiosClient from "../axios";
 import JobListTable from "../components/JobListTable";
@@ -10,13 +11,31 @@ function JobStages() {
             .get("job")
             .then(({ data }) => {
                 setJobs(data.data);
-                console.log(data.data);
+                // console.log(data.data);
             })
             .catch((error) => {
                 console.log(error);
                 // handle the error response here
             });
     }, []);
+
+    const onDeleteClick = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will not be able to recover this survey!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosClient.delete(`/job/${id}`).then(() => {
+                    // window.location.reload();
+                    console.log("The survey was deleted");
+                });
+            }
+        });
+    };
     return (
         <div className="container rounded mt-5 bg-table p-md-5">
             <div className="h2 font-weight-bold">Jobs</div>
@@ -35,7 +54,11 @@ function JobStages() {
                     </thead>
                     <tbody className="py-2">
                         {jobs.map((job) => (
-                            <JobListTable job={job} key={job.id} />
+                            <JobListTable
+                                onDeleteClick={onDeleteClick}
+                                job={job}
+                                key={job.id}
+                            />
                         ))}
                     </tbody>
                 </table>
