@@ -41,7 +41,7 @@ function Signup() {
                     const finalErrors = Object.values(
                         error.response.data.errors
                     ).reduce((accum, next) => [...next, ...accum], []);
-                    console.log(finalErrors);
+                    // console.log(finalErrors);
                     setError({ __html: finalErrors.join("<br>") });
                 }
                 console.error(error);

@@ -13,7 +13,7 @@ function DefaultLayout() {
         return <Navigate to="login" />;
     }
 
-    console.log(currentUser);
+    // console.log(currentUser);
 
     return (
         <>
