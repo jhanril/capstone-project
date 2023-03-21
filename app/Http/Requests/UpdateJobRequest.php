@@ -12,7 +12,7 @@ class UpdateJobRequest extends FormRequest
     public function authorize(): bool
     {
         $job = $this->route('job');
-        if ($this->user()->id() !== $job->user_id) {
+        if ($this->user()->id !== $job->user_id) {
             return false;
         }
         return true;
