@@ -1,0 +1,93 @@
+thead {
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #666;
+}
+img {
+    width: 40px;
+    height: 40px;
+}
+.name {
+    display: inline-block;
+}
+.bg-blue {
+    background-color: #ebf5fb;
+    border-radius: 8px;
+}
+.fa-x {
+    color: red;
+}
+.fa-check,
+.fa-minus {
+    color: blue;
+}
+.bg-blue:hover {
+    background-color: #3e64ff;
+    color: #eee;
+    cursor: pointer;
+}
+.bg-blue:hover .fa-check,
+.bg-blue:hover .fa-minus {
+    background-color: #3e64ff;
+    color: #eee;
+}
+
+.table thead th,
+.table td {
+    border: none;
+}
+
+.table tbody td:first-child {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.table tbody td:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#spacing-row {
+    height: 10px;
+}
+
+.bg-table {
+    background: #42726e4d !important;
+}
+
+.toggle-btn {
+    width: 40px;
+    height: 21px;
+    background: grey;
+    border-radius: 50px;
+    padding: 3px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s 0.1s ease-in-out;
+    -moz-transition: all 0.3s 0.1s ease-in-out;
+    -o-transition: all 0.3s 0.1s ease-in-out;
+    transition: all 0.3s 0.1s ease-in-out;
+}
+
+.toggle-btn > .inner-circle {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-transition: all 0.3s 0.1s ease-in-out;
+    -moz-transition: all 0.3s 0.1s ease-in-out;
+    -o-transition: all 0.3s 0.1s ease-in-out;
+    transition: all 0.3s 0.1s ease-in-out;
+}
+
+.toggle-btn.active {
+    background: blue !important;
+}
+
+.toggle-btn.active > .inner-circle {
+    margin-left: 19px;
+}
+@media (max-width: 575px) {
+    .container {
+        width: 125%;
+        padding: 20px 10px;
+    }
+}

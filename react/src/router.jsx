@@ -10,6 +10,7 @@ import Jobs from "./views/jobs";
 import JobForm from "./views/jobForm";
 import PageLayout from "./components/PageLayout";
 import EventForm from "./views/eventForm";
+import JobStages from "./views/jobStages";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
             {
                 path: "/events/create",
                 element: <EventForm />,
+            },
+            {
+                path: "/jobs-stages",
+                element: <JobStages />,
             },
         ],
     },
