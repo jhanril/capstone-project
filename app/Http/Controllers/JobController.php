@@ -83,8 +83,12 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job $job)
+    public function destroy(Job $job, Request $request)
     {
-        //
+        $user = $request->user();
+        if ($user->id !== $job->user_id) {
+            return abort(403, 'Unauthorized action');
+        }
+        $job->delete();
     }
 }
