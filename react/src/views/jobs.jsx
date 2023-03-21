@@ -15,7 +15,10 @@ function Jobs() {
             // console.log(jobs);
         });
     }, []);
-    const limit = window.location.pathname !== "/jobs" ? 6 : undefined;
+    const limit =
+        jobs.length >= 6 && window.location.pathname !== "/jobs"
+            ? 6
+            : undefined;
 
     return (
         <>
