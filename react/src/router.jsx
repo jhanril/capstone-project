@@ -8,6 +8,7 @@ import Signup from "./views/signup";
 import EmployerProfile from "./views/employerProfile";
 import Jobs from "./views/jobs";
 import JobForm from "./views/jobForm";
+import PageLayout from "./components/PageLayout";
 
 const router = createBrowserRouter([
     {
@@ -42,11 +43,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/jobs",
-                element: <Jobs />,
+                element: <PageLayout />,
             },
             {
                 path: "/jobs/create",
                 element: <JobForm />,
+            },
+            {
+                path: "/events",
+                element: <PageLayout />,
             },
         ],
     },

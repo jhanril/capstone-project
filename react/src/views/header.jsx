@@ -135,12 +135,18 @@ function Header() {
                                     Events
                                 </Link>
                             </li>
-                            <li>
-                                <a href="#portfolio">Job Stages</a>
-                            </li>
-                            <li>
-                                <a href="#team">Followers</a>
-                            </li>
+                            <Link
+                                to="/jobs-stages"
+                                className="nav-link scrollto active"
+                            >
+                                Job stages
+                            </Link>
+                            <Link
+                                to="/events-stages"
+                                className="nav-link scrollto active"
+                            >
+                                Event stages
+                            </Link>
                             <li style={{ visibility: "hidden" }}>
                                 <a href="blog.html">Spacer man</a>
                             </li>
@@ -152,9 +158,6 @@ function Header() {
                                 <ul>
                                     <li>
                                         <a href="#">Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Settings</a>
                                     </li>
                                     <li>
                                         <a href="#">Change Password</a>

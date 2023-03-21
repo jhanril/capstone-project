@@ -6,9 +6,9 @@ function JobListItem({ job }) {
             <div className="col-md-4">
                 <div className="card p-3 mb-2">
                     <div className="my-5 mx-3">
-                        <h3 className="heading">{job.title}</h3>
+                        <h3 className="heading">{job.company_name}</h3>
                         <br />
-                        <h5>{job.type}</h5>
+                        <h5>{job.job_type}</h5>
                         <div className="mt-5">
                             <div className="d-flex row  mb-0">
                                 <div className="col ">
