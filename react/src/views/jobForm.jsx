@@ -1,12 +1,30 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axiosClient from "../axios";
 import "../assets/employer.css";
 import { useStateContext } from "../contexts/ContextProvider";
 import Swal from "sweetalert2";
 
 function JobForm() {
+    const currentPath = window.location.pathname;
+    const isJobs = currentPath === "/jobs/create";
+    const isJobStage = currentPath.startsWith("/job/edit/");
+    const [headerTitle, setHeaderTitle] = useState("");
+    const [toLink, setToLink] = useState("");
+    useEffect(() => {
+        if (isJobs) {
+            setHeaderTitle("Create New Job");
+            setToLink("/jobs");
+        }
+        if (isJobStage) {
+            setHeaderTitle("Update Job Details");
+            setToLink("/jobs-stages");
+        }
+    }, []);
+
     const { currentUser } = useStateContext();
+
+    const { id } = useParams();
 
     const [userId, setUserId] = useState(currentUser.id);
     const [status, setStatus] = useState(1);
@@ -23,8 +41,9 @@ function JobForm() {
         setError("");
 
         // use axiosClient to make the post request
-        axiosClient
-            .post("/jobs/create", {
+        let res = null;
+        if (id) {
+            res = axiosClient.put(`/job/${id}`, {
                 company_name: companyName,
                 user_id: userId,
                 status,
@@ -33,40 +52,78 @@ function JobForm() {
                 job_type: jobType,
                 location,
                 description: jobDescription,
-            })
-            .then(({ data }) => {
-                // console.log(data);
-                // handle successful response
+            });
+        } else {
+            res = axiosClient.post(`/job`, {
+                company_name: companyName,
+                user_id: userId,
+                status,
+                email,
+                phone,
+                job_type: jobType,
+                location,
+                description: jobDescription,
+            });
+        }
+        res.then(({ data }) => {
+            // console.log(data);
+            // handle successful response
+            if (!id) {
                 Swal.fire({
                     icon: "success",
                     title: "Job Created Successfully!",
                     showConfirmButton: true,
                     timer: 1500,
                 });
+
                 setCompanyName("");
                 setEmail("");
                 setPhone("");
                 setJobType("");
                 setLocation("");
                 setJobDescription("");
-            })
-            .catch((error) => {
-                if (error.response) {
-                    const finalErrors = Object.values(
-                        error.response.data.errors
-                    ).reduce((accum, next) => [...next, ...accum], []);
-                    setError({ __html: finalErrors.join("<br>") });
-                }
-                console.error(error);
-            });
+            } else {
+                Swal.fire({
+                    icon: "success",
+                    title: "Job Details Update Successfully!",
+                    showConfirmButton: true,
+                    timer: 1500,
+                });
+            }
+        }).catch((error) => {
+            if (error.response) {
+                const finalErrors = Object.values(
+                    error.response.data.errors
+                ).reduce((accum, next) => [...next, ...accum], []);
+                setError({ __html: finalErrors.join("<br>") });
+            }
+            console.error(error);
+        });
     };
+
+    useEffect(() => {
+        if (id) {
+            // setLoading(true);
+            axiosClient.get(`/job/${id}`).then(({ data }) => {
+                setUserId(data.data.user_id);
+                setStatus(data.data.status);
+                setCompanyName(data.data.company_name);
+                setEmail(data.data.email);
+                setPhone(data.data.phone);
+                setJobType(data.data.job_type);
+                setLocation(data.data.location);
+                setJobDescription(data.data.description);
+                console.log(data.data);
+            });
+        }
+    }, []);
     return (
         <div className="container-xl px-4 mt-4">
             <div className="mt-5 mb-3">
                 <div className="add-items d-flex justify-content-between">
-                    <h4>Create new job</h4>
+                    <h4>{headerTitle}</h4>
                     <Link
-                        to="/jobs"
+                        to={toLink}
                         className="add btn btn-danger font-weight-bold todo-list-add-btn"
                     >
                         cancel
@@ -228,10 +285,10 @@ function JobForm() {
                                 </div>
 
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-primary float-end"
                                     type="submit"
                                 >
-                                    Create Job
+                                    {id ? "Update Job" : "Create Job"}
                                 </button>
                             </form>
                         </div>

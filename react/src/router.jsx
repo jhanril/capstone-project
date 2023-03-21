@@ -53,6 +53,14 @@ const router = createBrowserRouter([
                 element: <JobForm />,
             },
             {
+                path: "/jobs-stages",
+                element: <JobStages />,
+            },
+            {
+                path: "/job/edit/:id",
+                element: <JobForm />,
+            },
+            {
                 path: "/events",
                 element: <PageLayout />,
             },
@@ -60,10 +68,7 @@ const router = createBrowserRouter([
                 path: "/events/create",
                 element: <EventForm />,
             },
-            {
-                path: "/jobs-stages",
-                element: <JobStages />,
-            },
+
             {
                 path: "/events-stages",
                 element: <EventStages />,
