@@ -22,7 +22,7 @@ function JobStages() {
     const onDeleteClick = (id) => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You will not be able to recover this survey!",
+            text: "You will not be able to recover this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Yes, delete it!",
@@ -31,7 +31,7 @@ function JobStages() {
             if (result.isConfirmed) {
                 axiosClient.delete(`/job/${id}`).then(() => {
                     // window.location.reload();
-                    console.log("The survey was deleted");
+                    console.log("The Job was deleted");
                     setJobs(jobs.filter((job) => job.id !== id));
                 });
             }

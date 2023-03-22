@@ -1,9 +1,28 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import axiosClient from "../axios";
 import { useStateContext } from "../contexts/ContextProvider";
 import Swal from "sweetalert2";
 function EventForm() {
+    const currentPath = window.location.pathname;
+    const isEvents = currentPath === "/events/create";
+    const isEventStage = currentPath.startsWith("/event/edit/");
+
+    const [headerTitle, setHeaderTitle] = useState("");
+    const [toLink, setToLink] = useState("");
+    useEffect(() => {
+        if (isEvents) {
+            setHeaderTitle("Create New Event");
+            setToLink("/events");
+        }
+        if (isEventStage) {
+            setHeaderTitle("Update Event Details");
+            setToLink("/events-stages");
+        }
+    }, []);
+
+    const { id } = useParams();
+
     const { currentUser } = useStateContext();
 
     const [userId, setUserId] = useState(currentUser.id);
@@ -19,17 +38,31 @@ function EventForm() {
         setError("");
 
         // use axiosClient to make the post request
-        axiosClient
-            .post("/events/create", {
+        let res = null;
+
+        if (id) {
+            res = axiosClient.put(`/event/${id}`, {
                 user_id: userId,
                 event_name: eventName,
                 event_description: eventDescription,
                 location,
                 start_date: startDate,
                 end_date: endDate,
-            })
-            .then(({ data }) => {
-                // handle successful response
+            });
+        } else {
+            res = axiosClient.post(`/events/create`, {
+                user_id: userId,
+                event_name: eventName,
+                event_description: eventDescription,
+                location,
+                start_date: startDate,
+                end_date: endDate,
+            });
+        }
+
+        res.then(({ data }) => {
+            // handle successful response
+            if (!id) {
                 Swal.fire({
                     icon: "success",
                     title: "Event Created Successfully!",
@@ -41,18 +74,38 @@ function EventForm() {
                 setLocation("");
                 setStartDate("");
                 setEndDate("");
-            })
-            .catch((error) => {
-                if (error.response) {
-                    const finalErrors = Object.values(
-                        error.response.data.errors
-                    ).reduce((accum, next) => [...next, ...accum], []);
-                    setError({ __html: finalErrors.join("<br>") });
-                }
-                console.error(error);
-            });
+            } else {
+                Swal.fire({
+                    icon: "success",
+                    title: "Event Details Update Successfully!",
+                    showConfirmButton: true,
+                    timer: 1500,
+                });
+            }
+        }).catch((error) => {
+            if (error.response) {
+                const finalErrors = Object.values(
+                    error.response.data.errors
+                ).reduce((accum, next) => [...next, ...accum], []);
+                setError({ __html: finalErrors.join("<br>") });
+            }
+            console.error(error);
+        });
     };
-
+    useEffect(() => {
+        if (id) {
+            // setLoading(true);
+            axiosClient.get(`/event/${id}`).then(({ data }) => {
+                setUserId(data.data.user_id);
+                setEventName(data.data.event_name);
+                setEventDescription(data.data.event_description);
+                setLocation(data.data.location);
+                setStartDate(data.data.start_date);
+                setEndDate(data.data.end_date);
+                console.log(data.data);
+            });
+        }
+    }, []);
     return (
         <>
             <div className="container mt-5 mb-3">
@@ -60,9 +113,9 @@ function EventForm() {
                     <div className="container-xl px-4 mt-4">
                         <div className="mt-5 mb-3">
                             <div className="add-items d-flex justify-content-between">
-                                <h4>Create New Event/Training</h4>
+                                <h4>{headerTitle}</h4>
                                 <Link
-                                    to="/events"
+                                    to={toLink}
                                     className="add btn btn-danger font-weight-bold todo-list-add-btn"
                                 >
                                     Cancel
@@ -243,9 +296,11 @@ function EventForm() {
 
                                             <button
                                                 type="submit"
-                                                className="btn btn-primary"
+                                                className="btn btn-primary float-end"
                                             >
-                                                Create
+                                                {id
+                                                    ? "Update Event"
+                                                    : "Create Event"}
                                             </button>
                                         </form>
                                     </div>

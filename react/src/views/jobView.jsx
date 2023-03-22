@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axiosClient from "../axios";
 import "../assets/jobview.css";
 
 function JobView() {
     const { id } = useParams();
+    const currentPath = window.location.pathname;
+    const isJobView = currentPath.startsWith("/job/view/");
+
     const [job, setJob] = useState({
         company_name: "",
         created_at: "",
@@ -35,13 +38,14 @@ function JobView() {
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-caption text-center">
                                 <h1 class="page-title">{job.company_name}</h1>
-                                <button
+                                <Link
+                                    to={`/job/view/apply/${job.id}`}
                                     type="submit"
                                     value="Apply For This Job"
                                     class="btn btn-success rounded-pill btn-addpad mt-5"
                                 >
                                     APPLY FOR THIS JOB
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -51,6 +55,7 @@ function JobView() {
             <div class="card-section">
                 <div class="container">
                     <div class="card-block bg-white mb30">
+                        {/* {isJobView ? ( */}
                         <div class="row">
                             <div class="text-area">
                                 <div class="container">
@@ -97,6 +102,7 @@ function JobView() {
                                 </div>
                             </div>
                         </div>
+                        {/* ) : null} */}
                     </div>
                 </div>
             </div>

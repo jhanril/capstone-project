@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axios";
+import Swal from "sweetalert2";
 import EventListTable from "../components/EventListTable";
 
 function EventStages() {
@@ -17,6 +18,25 @@ function EventStages() {
                 // handle the error response here
             });
     }, []);
+
+    const onDeleteClick = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will not be able to recover this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosClient.delete(`/event/${id}`).then(() => {
+                    // window.location.reload();
+                    console.log("The event was deleted");
+                    setEvents(events.filter((event) => event.id !== id));
+                });
+            }
+        });
+    };
     return (
         <>
             <div className="container mt-5 mb-3">
@@ -30,12 +50,13 @@ function EventStages() {
                                         <th scope="col">Event Name</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Date Start</th>
-                                        <th scope="col">Date End</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody className="py-2">
                                     {events.map((event) => (
                                         <EventListTable
+                                            onDeleteClick={onDeleteClick}
                                             event={event}
                                             key={event.id}
                                         />

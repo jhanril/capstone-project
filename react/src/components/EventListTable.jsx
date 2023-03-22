@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function formatDate(dateString) {
     const options = {
@@ -15,7 +16,7 @@ function formatDate(dateString) {
     return date.toLocaleDateString("en-US", options);
 }
 
-function EventListTable({ event }) {
+function EventListTable({ event, onDeleteClick }) {
     return (
         <>
             <tr className="bg-blue">
@@ -26,9 +27,13 @@ function EventListTable({ event }) {
                 </td>
                 <td className="pt-3 mt-1">{event.location}</td>
                 <td className="pt-3">{formatDate(event.start_date)}</td>
-                <td className="pt-3">{formatDate(event.end_date)}</td>
                 <td className="pt-3">
-                    <span className="fa fa-ellipsis-v btn"></span>
+                    <Link to={`/event/edit/${event.id}`}>
+                        <i className="bi bi-pencil-square"></i>
+                    </Link>
+                    <span onClick={() => onDeleteClick(event.id)}>
+                        <i className="bi bi-trash"></i>
+                    </span>
                 </td>
             </tr>
             <tr id="spacing-row">
