@@ -30,3 +30,4 @@ Route::post('/events/create', [EventController::class, 'store']);
 
 
 Route::get('/job', [JobController::class, 'index'])->withoutMiddleware('auth');
+Route::get('/event', [EventController::class, 'index'])->withoutMiddleware('auth');
