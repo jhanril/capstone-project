@@ -179,12 +179,10 @@ function Header() {
                 </div>
             </header>
             <main id="main" style={{ minHeight: "100vh" }}>
-                <section id="about" className="about">
-                    <div className="container">
+                <section id="content" className="content">
+                    <div className="container-fluid">
                         <div className="row">
-                            <div className="col-lg-12">
-                                <Outlet />
-                            </div>
+                            <Outlet />
                         </div>
                     </div>
                 </section>

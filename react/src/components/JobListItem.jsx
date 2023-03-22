@@ -1,33 +1,52 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import JobView from "../views/jobView";
 
 function JobListItem({ job }) {
+    const getTimeAgo = (timestamp) => {
+        const date = new Date(timestamp);
+        const timeAgo =
+            Math.floor((new Date() - date) / (1000 * 60 * 60)) + " hours ago";
+        return timeAgo;
+    };
     return (
         <>
-            <div className="col-md-4">
-                <div className="card p-3 mb-2">
-                    <div className="my-5 mx-3">
-                        <h3 className="heading">{job.company_name}</h3>
-                        <br />
-                        <h5>{job.job_type}</h5>
-                        <div className="mt-5">
-                            <div className="d-flex row  mb-0">
-                                <div className="col ">
-                                    <p className="text-muted">
-                                        {" "}
-                                        {job.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card-footer border-0 text-center mx-auto ">
-                        <h5 className="footer">
-                            {" "}
-                            <a href="" className="text-decoration-none">
-                                {" "}
-                                VIEW JOB
+            <div className="col-lg-4 col-md-6 col-sm-12">
+                <div className="category mb-30">
+                    <div className="job">
+                        <span className="colors1 mb-4">Urgent Hiring</span>
+                        <h4>
+                            <a href="#" className="fw-bold">
+                                {job.company_name}
                             </a>
-                        </h5>
+                        </h4>
+                        <ul className="place mt-4">
+                            <li>
+                                <p>
+                                    <i className="fas fa-map-marker-alt pe-2"></i>{" "}
+                                    {job.location}
+                                </p>
+                            </li>
+                            <li>
+                                <p className="ps-5">
+                                    <i className="fas fa-map-marker-alt pe-2"></i>
+                                    {job.job_type}
+                                </p>
+                            </li>
+                        </ul>
+                        <div className="d-flex align-items-center justify-content-between">
+                            <div className="left fw-bold">
+                                <Link
+                                    to={`/job/view/${job.id}`}
+                                    className="text-decoration-none"
+                                >
+                                    VIEW JOB
+                                </Link>
+                            </div>
+                            <span className="time fw-bold">
+                                {getTimeAgo(job.created_at)}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

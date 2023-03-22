@@ -118,179 +118,195 @@ function JobForm() {
         }
     }, []);
     return (
-        <div className="container-xl px-4 mt-4">
-            <div className="mt-5 mb-3">
-                <div className="add-items d-flex justify-content-between">
-                    <h4>{headerTitle}</h4>
-                    <Link
-                        to={toLink}
-                        className="add btn btn-danger font-weight-bold todo-list-add-btn"
-                    >
-                        cancel
-                    </Link>
-                </div>
-            </div>
-            <hr className="mt-0 mb-4" />
+        <div className="container mt-5 mb-3">
+            <div className="container px-5">
+                <div className="container-xl px-4 mt-4">
+                    <div className="mt-5 mb-3">
+                        <div className="add-items d-flex justify-content-between">
+                            <h4>{headerTitle}</h4>
+                            <Link
+                                to={toLink}
+                                className="add btn btn-danger font-weight-bold todo-list-add-btn"
+                            >
+                                cancel
+                            </Link>
+                        </div>
+                    </div>
+                    <hr className="mt-0 mb-4" />
 
-            {error.__html && (
-                <div
-                    className="alert alert-danger"
-                    dangerouslySetInnerHTML={error}
-                ></div>
-            )}
+                    {error.__html && (
+                        <div
+                            className="alert alert-danger"
+                            dangerouslySetInnerHTML={error}
+                        ></div>
+                    )}
 
-            <div className="row">
-                <div className="col-xl-12">
-                    <div className="card mb-4">
-                        <div className="card-header">Job Details</div>
-                        <div className="card-body">
-                            <form onSubmit={handleSubmit}>
-                                <input
-                                    type="hidden"
-                                    name="user_id"
-                                    value={userId}
-                                />
-                                <input
-                                    type="hidden"
-                                    name="status"
-                                    value={status}
-                                />
-                                <div className="mb-3">
-                                    <label
-                                        className="small mb-1"
-                                        htmlFor="companyName"
-                                    >
-                                        Job Title
-                                    </label>
-                                    <input
-                                        className="form-control"
-                                        id="companyName"
-                                        type="text"
-                                        placeholder="Job Title"
-                                        value={companyName}
-                                        onChange={(ev) =>
-                                            setCompanyName(ev.target.value)
-                                        }
-                                    />
-                                </div>
-
-                                <div className="row gx-3 mb-3">
-                                    <div className="col-md-6">
-                                        <label
-                                            className="small mb-1"
-                                            htmlFor="inputEmailAddress"
-                                        >
-                                            Email address
-                                        </label>
+                    <div className="row">
+                        <div className="col-xl-12">
+                            <div className="card mb-4">
+                                <div className="card-header">Job Details</div>
+                                <div className="card-body">
+                                    <form onSubmit={handleSubmit}>
                                         <input
-                                            className="form-control"
-                                            id="inputEmailAddress"
-                                            type="email"
-                                            placeholder="Enter your email address"
-                                            value={email}
-                                            onChange={(ev) =>
-                                                setEmail(ev.target.value)
-                                            }
+                                            type="hidden"
+                                            name="user_id"
+                                            value={userId}
                                         />
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <label
-                                            className="small mb-1"
-                                            htmlFor="inputPhone"
-                                        >
-                                            Phone number
-                                        </label>
                                         <input
-                                            className="form-control"
-                                            id="inputPhone"
-                                            type="tel"
-                                            placeholder="Enter your phone number"
-                                            value={phone}
-                                            onChange={(ev) =>
-                                                setPhone(ev.target.value)
-                                            }
+                                            type="hidden"
+                                            name="status"
+                                            value={status}
                                         />
-                                    </div>
-                                </div>
+                                        <div className="mb-3">
+                                            <label
+                                                className="small mb-1"
+                                                htmlFor="companyName"
+                                            >
+                                                Job Title
+                                            </label>
+                                            <input
+                                                className="form-control"
+                                                id="companyName"
+                                                type="text"
+                                                placeholder="Job Title"
+                                                value={companyName}
+                                                onChange={(ev) =>
+                                                    setCompanyName(
+                                                        ev.target.value
+                                                    )
+                                                }
+                                            />
+                                        </div>
 
-                                <div className="row gx-3 mb-3">
-                                    <div className="col-md-6">
-                                        <label
-                                            className="small mb-1"
-                                            htmlFor="select_type"
+                                        <div className="row gx-3 mb-3">
+                                            <div className="col-md-6">
+                                                <label
+                                                    className="small mb-1"
+                                                    htmlFor="inputEmailAddress"
+                                                >
+                                                    Email address
+                                                </label>
+                                                <input
+                                                    className="form-control"
+                                                    id="inputEmailAddress"
+                                                    type="email"
+                                                    placeholder="Enter your email address"
+                                                    value={email}
+                                                    onChange={(ev) =>
+                                                        setEmail(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label
+                                                    className="small mb-1"
+                                                    htmlFor="inputPhone"
+                                                >
+                                                    Phone number
+                                                </label>
+                                                <input
+                                                    className="form-control"
+                                                    id="inputPhone"
+                                                    type="tel"
+                                                    placeholder="Enter your phone number"
+                                                    value={phone}
+                                                    onChange={(ev) =>
+                                                        setPhone(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="row gx-3 mb-3">
+                                            <div className="col-md-6">
+                                                <label
+                                                    className="small mb-1"
+                                                    htmlFor="select_type"
+                                                >
+                                                    Job Type
+                                                </label>
+                                                <select
+                                                    name="select_type"
+                                                    className="form-control"
+                                                    id="select_type"
+                                                    value={jobType}
+                                                    onChange={(ev) =>
+                                                        setJobType(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                >
+                                                    <option>Select type</option>
+                                                    <option value="Full-time">
+                                                        Full-time
+                                                    </option>
+                                                    <option value="Part-time">
+                                                        Part-time
+                                                    </option>
+                                                    <option value="Intern">
+                                                        Intern
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label
+                                                    className="small mb-1"
+                                                    htmlFor="inputLocation"
+                                                >
+                                                    Location
+                                                </label>
+                                                <input
+                                                    className="form-control"
+                                                    id="inputLocation"
+                                                    name="location"
+                                                    type="text"
+                                                    placeholder="Enter your location"
+                                                    value={location}
+                                                    onChange={(ev) =>
+                                                        setLocation(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-3 edit">
+                                            <label
+                                                htmlFor="jobDescription"
+                                                className="small mb-1"
+                                            >
+                                                Job Description
+                                            </label>
+                                            <textarea
+                                                className="form-control"
+                                                id="jobDescription"
+                                                name="description"
+                                                rows="5"
+                                                value={jobDescription}
+                                                onChange={(ev) =>
+                                                    setJobDescription(
+                                                        ev.target.value
+                                                    )
+                                                }
+                                            ></textarea>
+                                        </div>
+
+                                        <button
+                                            className="btn btn-primary float-end"
+                                            type="submit"
                                         >
-                                            Job Type
-                                        </label>
-                                        <select
-                                            name="select_type"
-                                            className="form-control"
-                                            id="select_type"
-                                            value={jobType}
-                                            onChange={(ev) =>
-                                                setJobType(ev.target.value)
-                                            }
-                                        >
-                                            <option>Select type</option>
-                                            <option value="Full-time">
-                                                Full-time
-                                            </option>
-                                            <option value="Part-time">
-                                                Part-time
-                                            </option>
-                                            <option value="Intern">
-                                                Intern
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div className="col-md-6">
-                                        <label
-                                            className="small mb-1"
-                                            htmlFor="inputLocation"
-                                        >
-                                            Location
-                                        </label>
-                                        <input
-                                            className="form-control"
-                                            id="inputLocation"
-                                            name="location"
-                                            type="text"
-                                            placeholder="Enter your location"
-                                            value={location}
-                                            onChange={(ev) =>
-                                                setLocation(ev.target.value)
-                                            }
-                                        />
-                                    </div>
+                                            {id ? "Update Job" : "Create Job"}
+                                        </button>
+                                    </form>
                                 </div>
-
-                                <div className="mb-3 edit">
-                                    <label
-                                        htmlFor="jobDescription"
-                                        className="small mb-1"
-                                    >
-                                        Job Description
-                                    </label>
-                                    <textarea
-                                        className="form-control"
-                                        id="jobDescription"
-                                        name="description"
-                                        rows="5"
-                                        value={jobDescription}
-                                        onChange={(ev) =>
-                                            setJobDescription(ev.target.value)
-                                        }
-                                    ></textarea>
-                                </div>
-
-                                <button
-                                    className="btn btn-primary float-end"
-                                    type="submit"
-                                >
-                                    {id ? "Update Job" : "Create Job"}
-                                </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

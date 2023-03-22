@@ -1,7 +1,10 @@
+import Events from "../events";
+import Jobs from "../jobs";
 function Landingpage() {
     return (
         <>
-            <div>Landingpage</div>
+            <Jobs />
+            <Events />
         </>
     );
 }

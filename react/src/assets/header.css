@@ -26,12 +26,8 @@ h6,
 /*--------------------------------------------------------------
   # Sections General
   --------------------------------------------------------------*/
-section {
-    padding: 60px 0;
-}
-
 .section-bg {
-    background-color: #f2f9f8;
+    background-color: #9c9c9c;
 }
 
 .section-title {

@@ -91,6 +91,76 @@ img {
 .bi-pencil-square {
     color: blue;
 }
+
+.category .job {
+    height: fit-content;
+    border: 1px solid transparent;
+    padding: 30px 19px 25px 19px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.category .job:hover {
+    border: 1px solid #0d6efd;
+}
+
+.category .job span {
+    padding: 6px 20px;
+    font-weight: 400;
+    border-radius: 26px;
+    display: inline-block;
+}
+
+.category .job .colors1 {
+    font-weight: 800;
+    color: #4294f2;
+    background: rgba(66, 148, 255, 0.26);
+}
+
+.place {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 0px 20px;
+    color: #76787a;
+}
+
+.left {
+    font-weight: 800;
+}
+
+.category .job span.time {
+    font-weight: 900;
+}
+li {
+    list-style: none;
+}
+.category .job span.time {
+    font-weight: 900;
+}
+
+/* .btn.btn-primary {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+.job > h4 {
+    height: 80px;
+}
+
+.job > ul.place.mt-4 {
+    height: 80px;
+}
 @media (max-width: 575px) {
     .container {
         width: 100%;

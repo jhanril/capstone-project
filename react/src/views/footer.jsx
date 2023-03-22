@@ -5,13 +5,12 @@ function Footer() {
                 <div className="copyright">
                     &copy; Copyright{" "}
                     <strong>
-                        <span>Amoeba</span>
+                        <span>Rackets4all</span>
                     </strong>
                     . All Rights Reserved
                 </div>
                 <div className="credits">
-                    Designed by{" "}
-                    <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Designed by <a href="#">Team 2</a>
                 </div>
             </div>
         </footer>

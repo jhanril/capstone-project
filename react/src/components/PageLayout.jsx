@@ -24,19 +24,23 @@ function PageLayout() {
     }, []);
     return (
         <div className="container mt-5 mb-3">
-            <div className="mt-5 mb-3">
-                <div className="add-items d-flex justify-content-between">
-                    <h4>{headerTitle}</h4>
-                    <Link
-                        to={toLink}
-                        className="add btn btn-primary font-weight-bold todo-list-add-btn"
-                    >
-                        Add
-                    </Link>
+            <div className="container px-5">
+                <div className="container">
+                    <div className="mt-5 mb-3">
+                        <div className="add-items d-flex justify-content-between">
+                            <h4>{headerTitle}</h4>
+                            <Link
+                                to={toLink}
+                                className="add btn btn-primary font-weight-bold todo-list-add-btn"
+                            >
+                                Add
+                            </Link>
+                        </div>
+                    </div>
+                    <hr className="mt-0 mb-4" />
                 </div>
+                {isJobs ? <Jobs /> : isEvents ? <Events /> : null}
             </div>
-            <hr className="mt-0 mb-4" />
-            {isJobs ? <Jobs /> : isEvents ? <Events /> : null}
         </div>
     );
 }

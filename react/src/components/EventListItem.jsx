@@ -16,38 +16,41 @@ function EventListItem({ event }) {
         return `${month} ${day}, ${year}`;
     }
     return (
-        <div className="col-md-4">
-            <div className="card p-3 mb-2">
-                <div className="my-5 mx-3">
-                    <h3 className="heading">{event.event_name}</h3>
-                    <br />
-                    <small>{event.location}</small>
-                    <div className="my-5">
-                        <div className="d-flex row  mb-0">
-                            <div className="col ">
-                                <p className="text-muted">
-                                    {" "}
+        <>
+            <div className="col-md-4">
+                <div className="main-card mb-3 card">
+                    <div className="card-header">
+                        <hr />
+                        <h5 className="fw-bold">{event.event_name}</h5>
+                        <hr />
+                        <small>
+                            {formatDate(event.start_date)} | {day}
+                        </small>
+                    </div>
+                    <div className="card-body" style={{ minHeight: "200px" }}>
+                        <div className="tab-content">
+                            <div>
+                                <p
+                                    style={{
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        height: "170px",
+                                    }}
+                                >
                                     {event.event_description}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <p>
-                        {formatDate(event.start_date)} :{" "}
-                        <small className="text-muted">{day}</small>
-                    </p>
-                </div>
-                <div className="card-footer border-0 text-center mx-auto ">
-                    <h5 className="footer">
-                        {" "}
+                    <div className="d-block text-center card-footer">
                         <a href="" className="text-decoration-none">
                             {" "}
                             VIEW Event
                         </a>
-                    </h5>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

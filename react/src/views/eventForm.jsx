@@ -55,179 +55,201 @@ function EventForm() {
 
     return (
         <>
-            <div className="container-xl px-4 mt-4">
-                <div className="mt-5 mb-3">
-                    <div className="add-items d-flex justify-content-between">
-                        <h4>Create New Event/Training</h4>
-                        <Link
-                            to="/events"
-                            className="add btn btn-danger font-weight-bold todo-list-add-btn"
-                        >
-                            Cancel
-                        </Link>
-                    </div>
-                </div>
-                <hr className="mt-0 mb-4" />
+            <div className="container mt-5 mb-3">
+                <div className="container px-5">
+                    <div className="container-xl px-4 mt-4">
+                        <div className="mt-5 mb-3">
+                            <div className="add-items d-flex justify-content-between">
+                                <h4>Create New Event/Training</h4>
+                                <Link
+                                    to="/events"
+                                    className="add btn btn-danger font-weight-bold todo-list-add-btn"
+                                >
+                                    Cancel
+                                </Link>
+                            </div>
+                        </div>
+                        <hr className="mt-0 mb-4" />
 
-                {error.__html && (
-                    <div
-                        className="alert alert-danger"
-                        dangerouslySetInnerHTML={error}
-                    ></div>
-                )}
+                        {error.__html && (
+                            <div
+                                className="alert alert-danger"
+                                dangerouslySetInnerHTML={error}
+                            ></div>
+                        )}
 
-                <div className="row">
-                    <div className="col-xl-12">
-                        <div className="card mb-4">
-                            <div className="card-header">Event Details</div>
-                            <div className="card-body">
-                                <form onSubmit={handleSubmit}>
-                                    <input
-                                        type="hidden"
-                                        name="user_id"
-                                        value={userId}
-                                    />
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="eventName"
-                                            className="form-label"
-                                        >
-                                            Event Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="eventName"
-                                            name="eventName"
-                                            placeholder="Enter Event Name"
-                                            value={eventName}
-                                            onChange={(ev) =>
-                                                setEventName(ev.target.value)
-                                            }
-                                        />
+                        <div className="row">
+                            <div className="col-xl-12">
+                                <div className="card mb-4">
+                                    <div className="card-header">
+                                        Event Details
                                     </div>
-
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="eventDescription"
-                                            className="form-label"
-                                        >
-                                            Event Description
-                                        </label>
-                                        <textarea
-                                            className="form-control"
-                                            id="eventDescription"
-                                            name="eventDescription"
-                                            rows="5"
-                                            placeholder="Enter Event Description"
-                                            value={eventDescription}
-                                            onChange={(ev) =>
-                                                setEventDescription(
-                                                    ev.target.value
-                                                )
-                                            }
-                                        ></textarea>
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="inputLocation"
-                                            className="form-label"
-                                        >
-                                            Location
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="inputLocation"
-                                            name="location"
-                                            placeholder="Enter Location"
-                                            value={location}
-                                            onChange={(ev) =>
-                                                setLocation(ev.target.value)
-                                            }
-                                        />
-                                    </div>
-
-                                    <div className="row gx-3 mb-3">
-                                        <div className="col-md-12">
-                                            <label className="form-label">
-                                                <h3>Date</h3>
-                                            </label>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label
-                                                htmlFor="inputStartDate"
-                                                className="form-label"
-                                            >
-                                                Start Date
-                                            </label>
+                                    <div className="card-body">
+                                        <form onSubmit={handleSubmit}>
                                             <input
-                                                type="datetime-local"
-                                                className="form-control"
-                                                id="inputStartDate"
-                                                name="startDate"
-                                                placeholder="Enter Start Date"
-                                                value={
-                                                    startDate ? startDate : ""
-                                                }
-                                                onChange={(ev) =>
-                                                    setStartDate(
-                                                        ev.target.value
-                                                            ? new Date(
-                                                                  ev.target.value
-                                                              )
-                                                                  .toISOString()
-                                                                  .slice(0, 19)
-                                                                  .replace(
-                                                                      "T",
-                                                                      " "
-                                                                  )
-                                                            : null
-                                                    )
-                                                }
+                                                type="hidden"
+                                                name="user_id"
+                                                value={userId}
                                             />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label
-                                                htmlFor="inputEndDate"
-                                                className="form-label"
-                                            >
-                                                End Date
-                                            </label>
-                                            <input
-                                                type="datetime-local"
-                                                className="form-control"
-                                                id="inputEndDate"
-                                                name="endDate"
-                                                placeholder="Enter End Date"
-                                                value={endDate ? endDate : ""}
-                                                onChange={(ev) =>
-                                                    setEndDate(
-                                                        ev.target.value
-                                                            ? new Date(
-                                                                  ev.target.value
-                                                              )
-                                                                  .toISOString()
-                                                                  .slice(0, 19)
-                                                                  .replace(
-                                                                      "T",
-                                                                      " "
-                                                                  )
-                                                            : null
-                                                    )
-                                                }
-                                            />
-                                        </div>
-                                    </div>
+                                            <div className="mb-3">
+                                                <label
+                                                    htmlFor="eventName"
+                                                    className="form-label"
+                                                >
+                                                    Event Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="eventName"
+                                                    name="eventName"
+                                                    placeholder="Enter Event Name"
+                                                    value={eventName}
+                                                    onChange={(ev) =>
+                                                        setEventName(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </div>
 
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary"
-                                    >
-                                        Create
-                                    </button>
-                                </form>
+                                            <div className="mb-3">
+                                                <label
+                                                    htmlFor="eventDescription"
+                                                    className="form-label"
+                                                >
+                                                    Event Description
+                                                </label>
+                                                <textarea
+                                                    className="form-control"
+                                                    id="eventDescription"
+                                                    name="eventDescription"
+                                                    rows="5"
+                                                    placeholder="Enter Event Description"
+                                                    value={eventDescription}
+                                                    onChange={(ev) =>
+                                                        setEventDescription(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                ></textarea>
+                                            </div>
+
+                                            <div className="mb-3">
+                                                <label
+                                                    htmlFor="inputLocation"
+                                                    className="form-label"
+                                                >
+                                                    Location
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="inputLocation"
+                                                    name="location"
+                                                    placeholder="Enter Location"
+                                                    value={location}
+                                                    onChange={(ev) =>
+                                                        setLocation(
+                                                            ev.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+
+                                            <div className="row gx-3 mb-3">
+                                                <div className="col-md-12">
+                                                    <label className="form-label">
+                                                        <h3>Date</h3>
+                                                    </label>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label
+                                                        htmlFor="inputStartDate"
+                                                        className="form-label"
+                                                    >
+                                                        Start Date
+                                                    </label>
+                                                    <input
+                                                        type="datetime-local"
+                                                        className="form-control"
+                                                        id="inputStartDate"
+                                                        name="startDate"
+                                                        placeholder="Enter Start Date"
+                                                        value={
+                                                            startDate
+                                                                ? startDate
+                                                                : ""
+                                                        }
+                                                        onChange={(ev) =>
+                                                            setStartDate(
+                                                                ev.target.value
+                                                                    ? new Date(
+                                                                          ev.target.value
+                                                                      )
+                                                                          .toISOString()
+                                                                          .slice(
+                                                                              0,
+                                                                              19
+                                                                          )
+                                                                          .replace(
+                                                                              "T",
+                                                                              " "
+                                                                          )
+                                                                    : null
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label
+                                                        htmlFor="inputEndDate"
+                                                        className="form-label"
+                                                    >
+                                                        End Date
+                                                    </label>
+                                                    <input
+                                                        type="datetime-local"
+                                                        className="form-control"
+                                                        id="inputEndDate"
+                                                        name="endDate"
+                                                        placeholder="Enter End Date"
+                                                        value={
+                                                            endDate
+                                                                ? endDate
+                                                                : ""
+                                                        }
+                                                        onChange={(ev) =>
+                                                            setEndDate(
+                                                                ev.target.value
+                                                                    ? new Date(
+                                                                          ev.target.value
+                                                                      )
+                                                                          .toISOString()
+                                                                          .slice(
+                                                                              0,
+                                                                              19
+                                                                          )
+                                                                          .replace(
+                                                                              "T",
+                                                                              " "
+                                                                          )
+                                                                    : null
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary"
+                                            >
+                                                Create
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
